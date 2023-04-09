@@ -83,7 +83,7 @@ function App() {
     labels: m_day_labels,
     datasets: [
       {
-        label: 'liters',
+        label: 'hundered liters',
         backgroundColor: 'rgba(0, 0, 255, 0.8)',
         borderColor: 'rgba(0, 0, 255, 1)',
         borderWidth: 1,

@@ -49,7 +49,7 @@ const month_data = {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(0, 0, 255, 0.6)',
         hoverBorderColor: 'rgba(0, 0, 255, 0.8)',
-        data: [10, 20, 30]
+        data: [10000, 20000, 30000]
       }
     ]
   };
@@ -58,7 +58,7 @@ const day_data = {
     labels: day_labels,
     datasets: [
       {
-        label: 'liters',
+        label: 'mililiters',
         backgroundColor: 'rgba(0, 0, 255, 0.8)',
         borderColor: 'rgba(0, 0, 255, 1)',
         borderWidth: 1,
