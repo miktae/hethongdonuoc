@@ -46,11 +46,14 @@ function App() {
   const ItemsCollectionRef = collection(db, "lora_datas")
 
   useEffect(
-    () => onSnapshot(ItemsCollectionRef, (snapshot) => {
+    () => {
+      onSnapshot(ItemsCollectionRef, (snapshot) => {
       setCurrentData(snapshot.docs.map(doc => ({
         ...doc.data(),
       })))
     })
+    alert("Để thay đổi dữ liệu, nhấn nút Change Data ở dưới")
+    } 
     , []);
 
   useEffect(() => {
