@@ -43,13 +43,13 @@ const month_data = {
     labels: month_labels,
     datasets: [
       {
-        label: 'liters',
+        label: 'm3',
         backgroundColor: 'rgba(0, 0, 255, 0.8)',
         borderColor: 'rgba(0, 0, 255, 1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(0, 0, 255, 0.6)',
         hoverBorderColor: 'rgba(0, 0, 255, 0.8)',
-        data: [10000, 20000, 30000]
+        data: [13, 5, 5]
       }
     ]
   };
@@ -58,37 +58,15 @@ const day_data = {
     labels: day_labels,
     datasets: [
       {
-        label: 'mililiters',
+        label: 'liters',
         backgroundColor: 'rgba(0, 0, 255, 0.8)',
         borderColor: 'rgba(0, 0, 255, 1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(0, 0, 255, 0.6)',
         hoverBorderColor: 'rgba(0, 0, 255, 0.8)',
-        data: [
-            150000,
-            120000,
-            100000,
-            90000,
-            85000,
-            80000,
-            95000,
-            150000,
-            200000,
-            220000,
-            230000,
-            240000,
-            250000,
-            240000,
-            230000,
-            220000,
-            210000,
-            230000,
-            250000,
-            270000,
-            260000,
-            230000,
-            200000,
-            170000]   
+        data: [15000.0, 12000.0, 10000.0, 9000.0, 8500.0, 8000.0,
+             9500.0, 15000.0, 20000.0, 22000.0, 23000.0, 24000.0, 25000.0, 24000.0, 23000.0, 22000.0, 21000.0, 
+            23000.0, 25000.0, 27000.0, 26000.0, 23000.0, 20000.0, 17000.0]   
       }
     ]
   };

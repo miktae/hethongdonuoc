@@ -4,8 +4,6 @@ import {
   collection,
   onSnapshot
 } from "firebase/firestore";
-import PDFContent from './components/PDFView'
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import {
   customerID, month_data, month_options
   , day_data, day_options, m_day_labels,
@@ -25,6 +23,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { useState, useEffect } from 'react';
 import ChangeDataView from './components/ChangeDataView';
+import PDFContent from './components/PDFView';
 
 ChartJS.register(
   CategoryScale,
@@ -48,12 +47,12 @@ function App() {
   useEffect(
     () => {
       onSnapshot(ItemsCollectionRef, (snapshot) => {
-      setCurrentData(snapshot.docs.map(doc => ({
-        ...doc.data(),
-      })))
-    })
-    alert("Để thay đổi dữ liệu, nhấn nút Change Data ở dưới")
-    } 
+        setCurrentData(snapshot.docs.map(doc => ({
+          ...doc.data(),
+        })))
+      })
+      // alert("Để thay đổi dữ liệu, nhấn nút Change Data ở dưới")
+    }
     , []);
 
   useEffect(() => {
@@ -106,68 +105,64 @@ function App() {
     setMonthView(true)
   }
 
+  function funcexportPDF(){
+    setExportPDF(true);
+  }
+
   return (
     <div className="App">
       <Navbar></Navbar>
       {
         exportPDF ?
-          <PDFViewPage /> :
+          <PDFContent month={selectedMonth}/> :
           changeView ?
-          <ChangeDataView />
-          :
-          <>
-            <div className="top_container">
-              <select className='customer_select'
-                onChange={(e) => console.log(e.target.value)}>
-                {
-                  customerID.map((value, index) => (
-                    <option value={value} key={index}>{value}</option>
-                  ))
-                }
-              </select>
-              <div className='value_view'>
-                Current value: {currentData.map((value) =>
-                  (value.value))} liters/ min
-              </div>
-              <div className='value_search'>
-                <label htmlFor="month-input">Select a month:</label>
-                <input
-                  type="month"
-                  id="month-input"
-                  value={selectedMonth}
-                  onChange={handleMonthChange}
-                  min={`${new Date().getFullYear()}-01`}
-                  max={`${new Date().getFullYear()}-12`}
-                />
-                {/* <button className='btn' onClick={()=>
-                  searchMonth()}>Search</button> */}
-                <PDFDownloadLink className='btn'
-                  document={<PDFContent />}
-                  fileName="customer_report.pdf">
-                  {({ blob, url, loading, error }) =>
-                    loading ? 'Generating PDF...' : 'Export PDF'
+            <ChangeDataView />
+            :
+            <>
+              <div className="top_container">
+                <select className='customer_select'
+                  onChange={(e) => console.log(e.target.value)}>
+                  {
+                    customerID.map((value, index) => (
+                      <option value={value} key={index}>{value}</option>
+                    ))
                   }
-                </PDFDownloadLink>
-              </div>
-            </div>
-            {
-              monthView ?
-                <Bar options={m_day_options} data={m_day_data} />
-                :
-                <div className="chart_container">
-                  <div className='bar_chart'>
-                    <Bar options={month_options} data={month_data} />
-                    <Bar options={day_options} data={day_data} />
-                  </div>
+                </select>
+                <div className='value_view'>
+                  Current value: {currentData.map((value) =>
+                    (value.value))} m<sup>3</sup> / h
                 </div>
-            }
-          </>
+                <div className='value_search'>
+                  <label htmlFor="month-input">Select a month:</label>
+                  <input
+                    type="month"
+                    id="month-input"
+                    value={selectedMonth}
+                    onChange={handleMonthChange}
+                    min={`${new Date().getFullYear()}-01`}
+                    max={`${new Date().getFullYear()}-12`}
+                  />
+                  <button className='btn' onClick={() =>
+                    funcexportPDF()}>Export PDF</button>
+                </div>
+              </div>
+              {
+                monthView ?
+                  <Bar options={m_day_options} data={m_day_data} />
+                  :
+                  <div className="chart_container">
+                    <div className='bar_chart'>
+                      <Bar options={month_options} data={month_data} />
+                      <Bar options={day_options} data={day_data} />
+                    </div>
+                  </div>
+              }
+            </>
       }
       <div className='footer'>
         <footer>
           <p>Copyright © 2023</p>
-          <button className='btn btn-change' onClick={()=>setChangeView(true)}>
-            ChangeData
+          <button className='btn btn-change' onClick={() => setChangeView(true)}>
           </button>
         </footer>
       </div>

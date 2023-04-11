@@ -1,58 +1,19 @@
 import React from 'react';
-import { Document, Page, View, Text, PDFViewer, Font } from '@react-pdf/renderer';
+import pdf1File from '../../public/Thang1.pdf';
+import pdf2File from '../../public/Thang2.pdf';
+import pdf3File from '../../public/Thang3.pdf';
 import './pdfview.css'
 
-Font.register({
-  family: 'OpenSans',
-  src: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap%22%20rel=%22stylesheet%22"
-});
-
-const currentDate = new Date();
-
-const PDFContent = () => (
-  <Document>
-    <Page size={'A4'}>
-      <View>
-        <Text className="text">WATER CONSUMPTION BILL</Text>
-      </View>
-      <View>
-        <Text>No: 001HDGTT001F</Text>
-      </View>
-      <View>
-        <Text>Exported date:  {currentDate.toDateString()}</Text>
-      </View>
-      <View>
-        <Text>Customer: Pham Van A</Text>
-      </View>
-      <View>
-        <Text>Add: Tay Ho, Hanoi</Text>
-      </View>
-      <View>
-        <Text>Customer id: KH001HD</Text>
-      </View>
-      <View>
-        <Text>LORA ID: DH1001</Text>
-      </View>
-      <View>
-        <Text>Water consumption: 3000 m3</Text>
-      </View>
-      <View>
-        <Text>Unit: 200 VND</Text>
-      </View>
-      <View>
-        <Text>Total: 300.000 VND</Text>
-      </View>
-      <View>
-        <Text>VAT: 0%</Text>
-      </View>
-      <View>
-        <Text>Total:  300.000 VND</Text>
-      </View>
-      <View>
-        <Text>Thanks for using our services!</Text>
-      </View>
-    </Page>
-  </Document>
-);
-
+function PDFContent(props) {
+  return (
+    <div className="pdf-content">
+      <embed src={ props.month == "2023-01" ?
+        pdf1File : (props.month == "2023-02" ?
+        pdf2File : (props.month == "2023-03" ?
+        pdf3File : null))}
+        type="application/pdf" 
+        width="100%" height="800px" />
+      </div>
+  )
+}
 export default PDFContent;
